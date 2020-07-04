@@ -43,7 +43,8 @@ namespace PokerProbabilities
                 return false;
             }
 
-            return obj1.Equals(obj2);
+            return (obj1.Card1.ToString().Equals(obj2.Card1.ToString()) && obj1.Card2.ToString().Equals(obj2.Card2.ToString())) ||
+            (obj1.Card1.ToString().Equals(obj2.Card2.ToString()) && obj1.Card2.ToString().Equals(obj2.Card1.ToString()));
         }
 
         public static bool operator !=(Hand obj1, Hand obj2)
@@ -74,8 +75,14 @@ namespace PokerProbabilities
         {
             unchecked
             {
-                return Card1.GetHashCode() ^ Card2.GetHashCode();
+                return Card1.ToString().GetHashCode() ^ Card2.ToString().GetHashCode();
             }
+        }
+
+
+        public override string ToString()
+        {
+            return Card1.ToString() + " / " + Card2.ToString();
         }
     }
 }

@@ -50,19 +50,38 @@ namespace PokerProbabilities
                 }
             }
 
-            foreach(var card in Deck_List)
+            foreach(var card1 in Deck_List)
             {
-                
+                foreach(var card2 in Deck_List)
+                {
+                    if(card1 != card2)
+                    {
+                        bool addhand = true;
+                        var temp_hand = new Hand(card1, card2);
+                        foreach(var vhand in Hands_List)
+                        {
+                            if(temp_hand == vhand)
+                            {
+                                addhand = false;
+                            }
+                        }
+                        if(addhand)
+                        {
+                            Hands_List.Add(temp_hand);
+                        }
+                    }
+                }
             }
 
+            foreach(var hand in Hands_List)
+            {
+                Console.WriteLine(hand);
+            }
 
-
-
-
-
-
-            Deck_Collection.InsertOne(deck_card.ToBson());
-            Deck_Collection.InsertMany()
+            //Deck_Collection.InsertOne(deck_card.ToBson());
+            //Deck_Collection.InsertMany()
         }
+
+
     }
 }
